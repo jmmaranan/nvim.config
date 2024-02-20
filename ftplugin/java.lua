@@ -10,7 +10,19 @@ local root_dir = require("jdtls.setup").find_root(root_markers)
 -- with multiple different projects, each project must use a dedicated data directory.
 -- This variable is used to configure eclipse to use the directory name of the
 -- current project found using the root_marker as the folder for project specific data.
-local workspace_folder = home .. "/.local/share/eclipse/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
+local eclipse_path = home .. "/.local/share/eclipse"
+local jdk_paths = home .. "/.sdkman/candidates/java"
+local os_value = "linux"
+
+if vim.fn.has("mac") == 1 then
+  os_value = "mac"
+elseif vim.fn.has("unix") == 1 then
+  os_value = "linux"
+elseif vim.fn.has("win32") == 1 then
+  os_value = "win"
+end
+
+local workspace_folder = eclipse_path .. "/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
 
 local on_attach = require("share.lsp").on_attach
 local nmap = require("share.lsp").nmap
@@ -46,7 +58,7 @@ local config = {
           -- Use Google Java style guidelines for formatting
           -- To use, make sure to download the file from https://github.com/google/styleguide/blob/gh-pages/eclipse-java-google-style.xml
           -- and place it in the ~/.local/share/eclipse directory
-          url = "/.local/share/eclipse/eclipse-java-google-style.xml",
+          url = eclipse_path .. "/eclipse-java-google-style.xml",
           profile = "GoogleStyle",
         },
       },
@@ -97,15 +109,16 @@ local config = {
         runtimes = {
           {
             name = "JavaSE-17",
-            path = home .. "/.sdkman/candidates/java/17.0.10-amzn",
+            path = jdk_paths .. "/17.0.10-amzn",
+            default = true,
           },
           {
             name = "JavaSE-11",
-            path = home .. "/.sdkman/candidates/java/11.0.22-amzn",
+            path = jdk_paths .. "/11.0.22-amzn",
           },
           {
             name = "JavaSE-1.8",
-            path = home .. "/.sdkman/candidates/java/8.0.402-amzn",
+            path = jdk_paths .. "/8.0.402-amzn",
           },
         },
       },
@@ -117,7 +130,7 @@ local config = {
   -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
   -- for the full list of options
   cmd = {
-    home .. "/.sdkman/candidates/java/17.0.10-amzn/bin/java",
+    jdk_paths .. "/17.0.10-amzn/bin/java",
     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
     "-Dosgi.bundles.defaultStartLevel=4",
     "-Declipse.product=org.eclipse.jdt.ls.core.product",
@@ -131,21 +144,18 @@ local config = {
     "java.base/java.lang=ALL-UNNAMED",
     -- If you use lombok, download the lombok jar and place it in ~/.local/share/eclipse
     "-javaagent:"
-      .. home
-      .. "/.local/share/eclipse/lombok.jar",
+      .. eclipse_path
+      .. "/lombok.jar",
 
     -- The jar file is located where jdtls was installed. This will need to be updated
     -- to the location where you installed jdtls
     "-jar",
-    vim.fn.glob(
-      home
-        .. "/workspace/git/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher_*.jar"
-    ),
+    vim.fn.glob(eclipse_path .. "/eclipse.jdt.ls/plugins/org.eclipse.equinox.launcher_*.jar"),
 
     -- The configuration for jdtls is also placed where jdtls was installed. This will
     -- need to be updated depending on your environment
     "-configuration",
-    home .. "/workspace/git/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/config_mac_arm",
+    eclipse_path .. "/eclipse.jdt.ls/config_" .. os_value,
 
     -- Use the workspace_folder defined above to store data for this project
     "-data",
