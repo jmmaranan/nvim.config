@@ -5,7 +5,7 @@ Refer to the [documentation](https://lazyvim.github.io/installation) to customiz
 
 This neovim config has scripts to help setup for Java development:
 ```bash
-$ make jdk # to install JDK 8, 11 and 17 using Amazon Corretto
+$ make jdk # to install JDK 8, 11 and 17 using Amazon Corretto via SDKMan
 $ make jdtls # to install eclipse jdtls and lombok
 ```
 Use mason+lspconfig to setup the language servers through keymap: `<leader>cm`
