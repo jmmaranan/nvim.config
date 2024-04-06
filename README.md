@@ -1,10 +1,11 @@
 # 💤 nvim.config with LazyVim
 
-Based on the starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
-Refer to the [documentation](https://lazyvim.github.io/installation) to customize.
+## Quick Start
+```bash
+git clone https://github.com/jmmaranan/nvim.config.git ~/.config/nvim
+```
 
-This neovim config has scripts to help setup for Java development:
-
+## Java Development
 ```bash
 # to install JDK 8, 11 and 17 using Amazon Corretto via SDKMan
 $ make jdk
@@ -13,7 +14,9 @@ $ make jdk
 $ make jdtls
 ```
 
-Use the `:Mason` to setup the following:
+## Mason Packages
+
+Use `<leader>cm` to open up the package menu and install the following:
 
 - markdownlint
 - cfn-lint
