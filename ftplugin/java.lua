@@ -108,6 +108,16 @@ local config = {
       configuration = {
         runtimes = {
           {
+            name = "JavaSE-22",
+            path = jdk_paths .. "/22.0.1-amzn",
+            default = true,
+          },
+          {
+            name = "JavaSE-21",
+            path = jdk_paths .. "/21.0.3-amzn",
+            default = true,
+          },
+          {
             name = "JavaSE-17",
             path = jdk_paths .. "/17.0.10-amzn",
             default = true,
