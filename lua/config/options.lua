@@ -31,3 +31,11 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "81"
 vim.opt.pumblend = 0
+
+-- Add filetype for go templ to enable
+-- syntax highlighting from TreeSitter
+vim.filetype.add({
+  extension = {
+    templ = "templ",
+  },
+})
