@@ -8,6 +8,14 @@ return {
     ensure_installed = {
       "stylua",
       "shfmt",
+      "checkstyle",
+      "golangci-lint",
+      "yamllint",
+      "cfn-lint",
+      "markdownlint",
+      "google-java-format",
+      "prettier",
+      "goimports",
     },
     ui = {
       border = "rounded",

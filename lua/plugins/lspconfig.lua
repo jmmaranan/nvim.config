@@ -2,6 +2,15 @@ return {
   "neovim/nvim-lspconfig",
   opts = {
     servers = {
+      lua_ls = {
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { "vim" },
+            },
+          },
+        },
+      },
       yamlls = {
         settings = {
           -- To support AWS Cloudformation
@@ -29,6 +38,10 @@ return {
           },
         },
       },
+      dockerls = {
+        filetypes = { "containerfile", "dockerfile" },
+      },
+      docker_compose_language_service = {},
     },
   },
 }

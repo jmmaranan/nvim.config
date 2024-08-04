@@ -13,3 +13,8 @@ jdtls:
 	curl -L https://www.eclipse.org/downloads/download.php?file=/jdtls/milestones/1.29.0/jdt-language-server-1.29.0-202310261436.tar.gz -o $(ECLIPSE_PATH)/eclipse.jdt.ls.tar.gz \
 		&& cd $(ECLIPSE_PATH) && mkdir eclipse.jdt.ls \
 		&& tar -xvf eclipse.jdt.ls.tar.gz -C eclipse.jdt.ls && rm -rf eclipse.jdt.ls.tar.gz
+
+.PHONY: refresh
+refresh:
+	chmod +x scripts/refresh.sh
+	./scripts/refresh.sh

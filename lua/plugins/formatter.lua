@@ -6,6 +6,7 @@ return {
       json = { "prettier" },
       javascript = { "prettier" },
       yaml = { "prettier" },
+      html = { "prettier" },
       markdown = { "prettier" },
       go = { "goimports" },
     },
